@@ -28,10 +28,6 @@
 			add_shortcode($this->get_module_name(), array($this, 'shortcode'));
 			add_action('wp_loaded', array($this, 'set_vat_exempt'));
 			add_action('init', array($this, 'exclude_from_search'));
-            // init backend options
-            add_action('admin_menu', array($this, 'menu'));
-            add_action('admin_enqueue_scripts', array($this, 'acp_style'));
-            add_action('admin_init', array($this, 'settings_api_init'));
 		}
 		public function exclude_from_search(){
 			// exclude from search results

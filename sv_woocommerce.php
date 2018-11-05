@@ -15,6 +15,7 @@
 		public function __construct($path,$url){
 			$this->set_section_title('WooCommerce');
 			$this->set_section_desc('WooCommerce Settings');
+			$this->set_section_type('settings');
 
 			$this->path								= $path;
 			$this->url								= $url;
@@ -29,7 +30,7 @@
 			add_action('init', array($this, 'init'));
 		}
 		public function admin_init(){
-			$this->get_root()->add_section($this, 'settings');
+			$this->get_root()->add_section($this);
 			$this->load_settings();
 		}
 		public function init(){

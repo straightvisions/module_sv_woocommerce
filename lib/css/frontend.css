@@ -106,11 +106,7 @@
 	}
 }
 #sv_checkout_body .gform_wrapper.sv_checkout_wrapper input[type="submit"]{
-	position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    width: calc( 100% - 160px );
+    width: 100%;
     margin: 30px 0;
     margin: 30px auto;
 }

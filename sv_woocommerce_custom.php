@@ -22,7 +22,7 @@
 			add_action('woocommerce_checkout_order_processed', array($this, 'woocommerce_checkout_order_processed'), 10, 3); // hook into order once it's into database, but before it's further processed
 			add_filter('sv_gravity_forms_qualified_vat_check_base_country', function($base_country){ return WC()->countries->get_base_country(); });
 			add_filter('woocommerce_coupons_enabled', array($this,'woocommerce_coupons_enabled'));
-			add_action('woocommerce_after_cart_table', 'woocommerce_checkout_coupon_form');
+			//add_action('woocommerce_after_cart_table', 'woocommerce_checkout_coupon_form');
 			add_filter('sv_woo_cart_sidebar', array($this, 'sv_woo_cart_sidebar'));
 			add_filter('sv_woo_cart_sidebar_cart_item', array($this, 'sv_woo_cart_sidebar_cart_item'), 10, 3);
 			add_shortcode($this->get_module_name(), array($this, 'shortcode'));

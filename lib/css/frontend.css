@@ -133,3 +133,16 @@
 #gform_submit_button_1000 {
 	width: 100%;
 }
+
+/* Sidebar Cart */
+.woocommerce-cart-item div.title {
+	min-height: 70px;
+}
+.sv_checkout_coupon input.form-control {
+	border: 2px solid rgba(0, 0, 0, .6);
+	border-radius: 3px;
+	text-transform: uppercase;
+}
+.sv_checkout_coupon button {
+	box-shadow: none;
+}

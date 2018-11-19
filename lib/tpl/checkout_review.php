@@ -86,7 +86,7 @@
 	</div>
 	</form>
 	<?php
-		add_action( 'woocommerce_after_checkout_form', 'woocommerce_checkout_coupon_form' );
-		do_action( 'woocommerce_after_checkout_form', $checkout );
+		//add_action( 'woocommerce_after_checkout_form', 'woocommerce_checkout_coupon_form' );
+		//do_action( 'woocommerce_after_checkout_form', $checkout );
 	?>
 </li>

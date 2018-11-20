@@ -56,8 +56,6 @@
 				}
 			}
 
-			echo do_shortcode('[sv_woocommerce_custom template="coupon"]');
-
 			ob_start();
 			wc_cart_totals_order_total_html();
 			$html			= ob_get_contents();

@@ -10,7 +10,6 @@
 	}
 
 	remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
-	echo do_shortcode('[sv_woocommerce_custom template="coupon_form"]');
 ?>
 <!-- summary --------------------------------------- -->
 <li id="summary" class="sv_checkout-nav-body-item active">

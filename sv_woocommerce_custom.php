@@ -63,7 +63,8 @@
 			$this->module_enqueue_scripts(true);
 			$settings									= shortcode_atts(
 				array(
-					'template'							=> false
+					'template'							=> false,
+					'checkout'                          => false
 				),
 				$settings,
 				$this->get_module_name()

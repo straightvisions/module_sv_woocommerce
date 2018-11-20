@@ -133,16 +133,11 @@
 #gform_submit_button_1000 {
 	width: 100%;
 }
+.sv_checkout_coupon input#coupon_code_frontend {
+	min-height: 45px;
+}
 
-/* Sidebar Cart */
-.woocommerce-cart-item div.title {
-	min-height: 70px;
-}
-.sv_checkout_coupon input.form-control {
-	border: 2px solid rgba(0, 0, 0, .6);
-	border-radius: 3px;
-	text-transform: uppercase;
-}
-.sv_checkout_coupon button {
-	box-shadow: none;
+/* Custom Thank You Page */
+section.woocommerce-order-details div.order_total {
+	border-top: 1px solid #000;
 }

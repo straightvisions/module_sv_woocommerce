@@ -8,8 +8,8 @@
 	}
 ?>
 <!-- billing --------------------------------------- -->
-<li id="billing" class="sv_checkout-nav-body-item active pb-5">	
-	<div class="row pb-5">
+<li id="billing" class="sv_checkout-nav-body-item active">
+	<div class="row p-0 m-0">
 		<div class="col-xs-12 col-sm-12 col-md-7 position-static gform_no_header">
 			<label class="font-weight-bold mb-4"><?php _e('Rechnungsadresse','sv_woocommerce'); ?></label>
 			<?php echo do_shortcode('[gravityform id="user_update_checkout" ajax="false"]'); ?>

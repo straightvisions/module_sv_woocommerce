@@ -56,14 +56,7 @@
 				}
 			}
 
-			echo '
-					<div class="row d-flex m-0 p-0 mt-4 sv_checkout_coupon">
-						<form method="post" class="card-deck sv_checkout_coupon">
-							<div class="col-12 col-sm-6 pr-3"><input type="text" name="coupon_code" class="form-control w-100 h-100 text-center" placeholder="' . __( 'Coupon code', 'woocommerce' ) . '" id="coupon_code" value="" /></div>
-							<div class="col-12 col-sm-6 pl-3"><button type="submit" class="btn btn-primary w-100" name="apply_coupon" value="' . __( 'Apply coupon', 'woocommerce' ) . '">' . __( 'Apply coupon', 'woocommerce' ) . '</button></div>
-						</form>
-					</div>
-					';
+			echo do_shortcode('[sv_woocommerce_custom template="coupon"]');
 
 			ob_start();
 			wc_cart_totals_order_total_html();

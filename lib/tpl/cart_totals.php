@@ -1,4 +1,4 @@
-<div class="cart-subtotal row">
+<div class="row m-0 p-0 cart-subtotal">
 	<div class="col-6"><?php _e('Subtotal', 'woocommerce'); ?></div>
 	<div class="col-6"><?php echo WC()->cart->get_cart_subtotal(); ?></div>
 </div>
@@ -9,7 +9,7 @@
 				$html			= ob_get_contents();
 				ob_end_clean();
 				echo '
-				<div class="cart-discount coupon-'.esc_attr(sanitize_title($code)).' row">
+				<div class="row m-0 p-0 cart-discount coupon-'.esc_attr(sanitize_title($code)).'">
 					<div class="col-6">'.wc_cart_totals_coupon_label($coupon, false).'</div>
 					<div class="col-6">'.$html.'</div>
 				</div>
@@ -26,7 +26,7 @@
 				$html			= ob_get_contents();
 				ob_end_clean();
 				echo '
-				<div class="fee row">
+				<div class="row m-0 p-0 fee">
 					<div class="col-6">'.esc_html($fee->name).'</div>
 					<div class="col-6">'.$html.'</div>
 				</div>
@@ -36,7 +36,7 @@
 				if('itemized' === get_option('woocommerce_tax_total_display')){
 					foreach(WC()->cart->get_tax_totals() as $code => $tax){
 					echo '
-					<div class="tax-rate tax-rate-'.sanitize_title($code).' row">
+					<div class="row m-0 p-0 tax-rate tax-rate-'.sanitize_title($code).' row">
 						<div class="col-6">'.esc_html($tax->label).'</div>
 						<div class="col-6">'.wp_kses_post($tax->formatted_amount).'</div>
 					</div>
@@ -48,7 +48,7 @@
 					$html			= ob_get_contents();
 					ob_end_clean();
 					echo '
-					<div class="tax-total row">
+					<div class="row m-0 p-0 tax-total">
 						<div class="col-6">'.esc_html(WC()->countries->tax_or_vat()).'</div>
 						<div class="col-6">'.$html.'</div>
 					</div>
@@ -61,7 +61,7 @@
 			$html			= ob_get_contents();
 			ob_end_clean();
 			echo '
-					<div class="order-total row woocommerce-mini-cart__total">
+					<div class="row m-0 p-0 py-4 mt-4 order-total woocommerce-mini-cart__total">
 						<div class="col-6">'.__('Total', 'woocommerce').'</div>
 						<div class="col-6">'.$html.'</div>
 					</div>

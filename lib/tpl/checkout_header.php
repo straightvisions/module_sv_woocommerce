@@ -1,6 +1,7 @@
 <style>
 	#gform_wrapper_1000{display:block !important;} /* hotfix */
 </style>
+<?php //echo do_shortcode('[sv_woocommerce_custom template="coupon_form"]'); ?>
 <div id="sv_checkout">
 	<div id="sv_checkout_header" class="row">
 		<div class="col-xs-12 col-sm-12">

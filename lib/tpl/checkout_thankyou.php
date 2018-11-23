@@ -3,7 +3,7 @@
 <li id="thankyou" class="sv_checkout-nav-body-item active">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12">
-			<div class="woocommerce-order card p-5">
+			<div class="woocommerce-order card p-4 p-sm-5">
 				<?php if ( $order ) : ?>
 
 					<?php if ( $order->has_status( 'failed' ) ) : ?>

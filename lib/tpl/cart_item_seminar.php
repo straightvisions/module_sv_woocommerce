@@ -67,6 +67,9 @@ if($seminar){
 					?>
 				</select>
 			</div>
+            <div class="col-12 text-grey font-size-sm pb-3">
+	            (Die Seminar-Teilnehmer können<br>Sie nach der Buchung zuweisen!)
+            </div>
 		</div>
 		<!-- city ------------------------------------------------------ -->
 		<div class="row d-flex align-items-center m-0 p-0 cart-city">
@@ -87,7 +90,7 @@ if($seminar){
 			</div>
 		</div>
 		<!-- total ----------------------------------------------------- -->
-		<div class="row d-flex align-items-center m-0 p-0 cart-total">
+		<div class="row d-flex font-weight-bold align-items-center m-0 p-0 cart-total">
 			<div class="col-12 col-sm-6">
 				<?php _e('Summe','sv_bb_woo_cart_sidebar');?>
 			</div>
@@ -105,7 +108,7 @@ if($seminar){
 						data-variant="<?php echo $location->get_bb_meta('city'); ?> - <?php echo $seminar->get_bb_meta('day_1'); ?>"
 						data-price="<?php echo $cart_item['data']->get_price(); ?>"
 						data-quantity="<?php echo $cart_item['quantity']; ?>"
-						class="cart-action-remove font-size-sm text-grey text-uppercase btn btn-mute btn-sm no-shadow" title="<?php _e('Entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Entfernen','sv_bb_woo_cart_sidebar');?></button>
+						class="cart-action-remove font-size-sm text-grey text-uppercase btn btn-mute btn-sm no-shadow" title="<?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?></button>
 			</div>
 		</div>
 	</li>

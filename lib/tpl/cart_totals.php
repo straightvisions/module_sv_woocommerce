@@ -60,6 +60,7 @@
 			wc_cart_totals_order_total_html();
 			$html			= ob_get_contents();
 			ob_end_clean();
+			echo do_shortcode('[sv_woocommerce_custom template="coupon"]');
 			echo '
 					<div class="row m-0 p-0 py-4 mt-4 order-total woocommerce-mini-cart__total">
 						<div class="col-6">'.__('Total', 'woocommerce').'</div>

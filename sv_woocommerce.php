@@ -21,7 +21,7 @@
 			$this->url								= $url;
 			$this->name								= get_class($this);
 
-			$this->custom();
+			$this->custom(); // don't delete, if removed the ajax get_cart will fail, but I don't know why currently
 
 			add_action( 'wp_enqueue_scripts', array($this, 'remove_woocommerce_styles_scripts'), 99 );
 			add_filter('woocommerce_email_headers', array($this, 'woocommerce_completed_order_email_bcc_copy'), 10, 2);
@@ -76,8 +76,5 @@
 				</script>
 			';
 		}
-		public function custom(){
-			
-		}
+
 	}
-?>

@@ -11,6 +11,7 @@
 	 */
 	class sv_woocommerce_custom extends sv_woocommerce{
 		public $order								= false;
+		public $is_checkout							= false;
 
 		public function custom(){
 			add_action('wp', array($this, 'wp'));
@@ -21,8 +22,6 @@
 			add_filter('woocommerce_checkout_fields', array($this, 'woocommerce_checkout_fields'));
 			add_action('woocommerce_checkout_order_processed', array($this, 'woocommerce_checkout_order_processed'), 10, 3); // hook into order once it's into database, but before it's further processed
 			add_filter('sv_gravity_forms_qualified_vat_check_base_country', function($base_country){ return WC()->countries->get_base_country(); });
-			add_filter('woocommerce_coupons_enabled', array($this,'woocommerce_coupons_enabled'));
-			//add_action('woocommerce_after_cart_table', 'woocommerce_checkout_coupon_form');
 			add_filter('sv_woo_cart_sidebar', array($this, 'sv_woo_cart_sidebar'));
 			add_filter('sv_woo_cart_sidebar_cart_item', array($this, 'sv_woo_cart_sidebar_cart_item'), 10, 3);
 			add_shortcode($this->get_module_name(), array($this, 'shortcode'));
@@ -59,7 +58,7 @@
 			include($this->get_path('lib/tpl/cart_item.php'));
 			return ob_get_clean();
 		}
-		public function shortcode($settings){
+		public function shortcode($settings):string{
 			$this->module_enqueue_scripts(true);
 			$settings									= shortcode_atts(
 				array(
@@ -74,6 +73,7 @@
 				include($this->get_path('lib/tpl/'.$settings['template'].'.php'));
 				return ob_get_clean();
 			}
+			return '';
 		}
 		public function wp(){
 			// custom wc styles
@@ -170,15 +170,5 @@
 			$order->calculate_totals(true);
 
 			return $order_id;
-		}
-		// hide coupon field on cart page
-		public function woocommerce_coupons_enabled($enabled){
-			if(is_cart()){
-				$enabled							= true;
-			}
-			if(is_checkout()){
-				$enabled							= true;
-			}
-			return $enabled;
 		}
 	}

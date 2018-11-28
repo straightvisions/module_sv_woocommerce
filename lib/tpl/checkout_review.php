@@ -11,9 +11,10 @@
 
 	remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 ?>
+<?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
 <!-- summary --------------------------------------- -->
 <li id="summary" class="sv_checkout-nav-body-item active">
-	<?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
+
 	<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-7">
@@ -71,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-5 sv_woo_cart_sidebar_content mt-0">
+			<div class="col-12 col-md-5 sv_woo_cart_sidebar_content coupon mt-0">
 				<?php echo do_shortcode('[sv_woocommerce_custom template="cart"]'); ?>
 			</div>
 		</div>

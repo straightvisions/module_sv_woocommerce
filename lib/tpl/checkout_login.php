@@ -12,8 +12,8 @@
 		<?php //echo do_shortcode('[sv_registration]'); ?>
 		<?php echo do_shortcode('[gravityform ID="user_registration_minimal" ajax="true"]'); ?>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-5 sv_woo_cart_sidebar_content">
-		<?php include('cart.php'); ?>
+	<div class="col-xs-12 col-sm-12 col-md-5 sv_woo_cart_sidebar_content coupon">
+		<?php echo do_shortcode('[sv_woocommerce_custom template="cart"]'); ?>
 	</div>
 </div>
 </li>

@@ -34,13 +34,9 @@ if($room){
 		$remove						= '';
 	}?>
 	<li name="<?php echo $cart_item_key;?>" class="woocommerce-cart-item">
-		<div class="row grid-small d-flex align-items-center cart-item-name">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-				<div class="bg-yellow padding-h-xs padding-v-xs font-weight-bold text-uppercase">
-					<?php echo $_product->get_title(); ?>
-				</div>
-			</div>
-		</div>
+        <div class="title bg-yellow font-weight-bold text-uppercase cart-item-name align-items-center d-flex p-4 mb-4">
+			<?php echo $_product->get_title(); ?>
+        </div>
 		<!-- date ------------------------------------------------------ -->
 		<div class="row cart-date d-flex align-items-center">
 			<div class="col-xs-12 col-sm-6">

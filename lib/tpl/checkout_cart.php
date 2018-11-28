@@ -14,8 +14,8 @@
 			<label class="font-weight-bold mb-4"><?php _e('Rechnungsadresse','sv_woocommerce'); ?></label>
 			<?php echo do_shortcode('[gravityform id="user_update_checkout" ajax="false"]'); ?>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-5 sv_woo_cart_sidebar_content pb-4 <?php echo $class; ?>">
-			<?php echo do_shortcode('[sv_woocommerce_custom template="cart" checkout="true"]'); ?>
+		<div class="col-xs-12 col-sm-12 col-md-5 sv_woo_cart_sidebar_content coupon pb-4 <?php echo $class; ?>">
+			<?php echo do_shortcode('[sv_woocommerce_custom template="cart"]'); ?>
 		</div>
 	</div>
 </li>

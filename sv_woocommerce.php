@@ -20,22 +20,19 @@
 			$this->path								= $path;
 			$this->url								= $url;
 			$this->name								= get_class($this);
+			
+			add_action( 'wp_enqueue_scripts', array($this, 'remove_woocommerce_styles_scripts'), 99 );
+			add_filter('woocommerce_email_headers', array($this, 'woocommerce_completed_order_email_bcc_copy'), 10, 2);
+			
+			add_action('admin_init', array($this, 'admin_init'));
+
+			if(!is_admin()){
+				$this->load_settings();
+			}
 		}
 		public function admin_init(){
 			$this->get_root()->add_section($this);
 			$this->load_settings();
-		}
-		public function init(){
-			$this->custom(); // don't delete, if removed the ajax get_cart will fail, but I don't know why currently
-
-			add_action( 'wp_enqueue_scripts', array($this, 'remove_woocommerce_styles_scripts'), 99 );
-			add_filter('woocommerce_email_headers', array($this, 'woocommerce_completed_order_email_bcc_copy'), 10, 2);
-
-			add_action('admin_init', array($this, 'admin_init'));
-			add_action('init', array($this, 'init'));
-			if(!is_admin()){
-				$this->load_settings();
-			}
 		}
 		public function load_settings(){
 			$this->s['completed_order_email_bcc'] = static::$settings->create($this)

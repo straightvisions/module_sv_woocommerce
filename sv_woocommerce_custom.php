@@ -70,7 +70,7 @@
 			);
 			if(isset($settings['template']) && file_exists($this->get_path('lib/tpl/'.$settings['template'].'.php'))){
 				ob_start();
-				include($this->get_path('lib/tpl/'.$settings['template'].'.php'));
+				include($this->get_file_path('lib/tpl/'.$settings['template'].'.php'));
 				return ob_get_clean();
 			}
 			return '';

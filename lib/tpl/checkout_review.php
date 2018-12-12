@@ -73,7 +73,7 @@
 				</div>
 			</div>
 			<div class="col-12 col-md-5 sv_woo_cart_sidebar_content coupon mt-0">
-				<?php echo do_shortcode('[sv_woocommerce_custom template="cart"]'); ?>
+				<?php echo do_shortcode('[sv_woocommerce template="cart"]'); ?>
 			</div>
 		</div>
 		<div class="row mt-5">

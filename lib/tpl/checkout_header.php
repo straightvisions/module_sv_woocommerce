@@ -31,13 +31,13 @@
 				<ul class="sv_checkout-nav-tabs-body">
 <?php
 if(!is_user_logged_in()){
-	echo do_shortcode('[sv_woocommerce_custom template="checkout_login"]');
+	echo do_shortcode('[sv_woocommerce template="checkout_login"]');
 }elseif(is_cart()){
-	echo do_shortcode('[sv_woocommerce_custom template="checkout_cart"]');
+	echo do_shortcode('[sv_woocommerce template="checkout_cart"]');
 }elseif(is_wc_endpoint_url('order-received')){
-	echo do_shortcode('[sv_woocommerce_custom template="checkout_thankyou"]');
+	echo do_shortcode('[sv_woocommerce template="checkout_thankyou"]');
 }elseif(is_checkout()){
-	echo do_shortcode('[sv_woocommerce_custom template="checkout_review"]');
+	echo do_shortcode('[sv_woocommerce template="checkout_review"]');
 }else{
 	
 }

@@ -68,7 +68,7 @@ if($seminar){
 				</select>
 			</div>
             <div class="col-12 text-grey font-size-sm pb-3">
-	            (Die Seminar-Teilnehmer können<br>Sie nach der Buchung zuweisen!)
+	            (Seminar-Teilnehmer können<br>Sie nach der Buchung zuweisen.)
             </div>
 		</div>
 		<!-- city ------------------------------------------------------ -->

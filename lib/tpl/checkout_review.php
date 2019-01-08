@@ -55,22 +55,22 @@
 					</div>
 				</div>
 				<p>&nbsp;</p>
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-7 position-static gform_no_header">
-						<h5>Ihre Vorteile auf einen Blick:</h5>
-						<ul class="list-style-check list-style-color-primary mb-5">
-							<li>Topaktuelle Seminare zu Themen, die die Welt bewegen</li>
-							<li>Hohe Interaktion im Seminar und sehr großer Anteil an
-				praktischen Übungen</li>
-							<li>Kleine Gruppengrößen bis zu 12 Teilnehmern</li>
-							<li>Alle Trainer sind erfahrene Entrepreneure und können
-				aus ihrer Erfahrung berichten
-				</li>
-							<li>Weiterempfehlungsrate von 97%</li>
-							<li>Über 500 Seminare mit über 7.500 zufriedenen
-				Teilnehmern in 2017</li>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 position-static gform_no_header">
+                        <h5>Ihre Vorteile auf einen Blick:</h5>
+                        <ul class="list-style-check list-style-color-primary">
+                            <li>Topaktuelle Seminare zu Themen, die die Welt bewegen</li>
+                            <li>Hohe Interaktion im Seminar und sehr großer Anteil an
+                                praktischen Übungen</li>
+                            <li>Kleine Gruppengrößen bis zu 12 Teilnehmern</li>
+                            <li>Alle Trainer sind erfahrene Entrepreneure und können
+                                aus ihrer Erfahrung berichten
+                            </li>
+                            <li>Weiterempfehlungsrate von 97%</li>
+                            <li>Über 500 Seminare mit über 7.500 zufriedenen
+                                Teilnehmern in 2017</li>
+                    </div>
+                </div>
 			</div>
 			<div class="col-12 col-md-5 sv_woo_cart_sidebar_content coupon mt-0">
 				<?php echo do_shortcode('[sv_woocommerce template="cart"]'); ?>

@@ -11,7 +11,7 @@
 				echo '
 				<div class="row m-0 p-0 cart-discount coupon-'.esc_attr(sanitize_title($code)).'">
 					<div class="col-6">'.wc_cart_totals_coupon_label($coupon, false).'</div>
-					<div class="col-6">'.$html.'</div>
+					<div class="col-6 text-right">'.$html.'</div>
 				</div>
 				';
 			}

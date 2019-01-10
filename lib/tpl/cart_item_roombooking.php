@@ -68,7 +68,7 @@ if($room){
 					data-variant="<?php echo $cart_item['data']->get_formatted_name(); ?>"
 					data-price="<?php echo $cart_item['data']->get_price(); ?>"
 					data-quantity="<?php echo $cart_item['quantity']; ?>"
-					class="cart-action-remove font-size-sm text-grey text-uppercase btn btn-mute btn-sm no-shadow" title="<?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?></button>
+					class="cart-action-remove font-size-sm text-grey btn btn-mute btn-sm no-shadow" title="<?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?></button>
 			</div>
 		</div>
 	</li>

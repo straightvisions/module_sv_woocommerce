@@ -26,15 +26,6 @@ class sv_woocommerce extends init {
 		$this->set_section_type( 'settings' );
 		$this->get_root()->add_section( $this );
 
-		// Loads Styles
-		static::$scripts->create( $this )
-		                ->set_source( $this->get_file_url( 'lib/css/frontend.css' ), $this->get_file_path( 'lib/css/frontend.css' ) );
-
-		// Loads Scripts
-		static::$scripts->create( $this )
-		                ->set_source( $this->get_file_url( 'lib/js/frontend.js' ), $this->get_file_path( 'lib/js/frontend.js' ) )
-		                ->set_type( 'js' );
-
 		// Loads Settings
 		$this->load_settings();
 

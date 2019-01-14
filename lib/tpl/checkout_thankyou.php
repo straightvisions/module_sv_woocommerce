@@ -3,7 +3,7 @@
 <li id="thankyou" class="sv_checkout-nav-body-item active">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12">
-			<div class="woocommerce-order card p-5">
+			<div class="woocommerce-order card p-4 p-sm-5">
 				<?php if ( $order ) : ?>
 
 					<?php if ( $order->has_status( 'failed' ) ) : ?>
@@ -19,7 +19,7 @@
 
 					<?php else : ?>
 
-						<h3 class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received mb-4"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></h4>
+						<h2 class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received mb-4"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></h2>
 
 						<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details mb-5">
 

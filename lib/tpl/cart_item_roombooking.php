@@ -34,13 +34,9 @@ if($room){
 		$remove						= '';
 	}?>
 	<li name="<?php echo $cart_item_key;?>" class="woocommerce-cart-item">
-		<div class="row grid-small d-flex align-items-center cart-item-name">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-				<div class="bg-yellow padding-h-xs padding-v-xs font-weight-bold text-uppercase">
-					<?php echo $_product->get_title(); ?>
-				</div>
-			</div>
-		</div>
+        <div class="title bg-yellow font-weight-bold text-uppercase cart-item-name align-items-center d-flex p-4 mb-4">
+			<?php echo $_product->get_title(); ?>
+        </div>
 		<!-- date ------------------------------------------------------ -->
 		<div class="row cart-date d-flex align-items-center">
 			<div class="col-xs-12 col-sm-6">
@@ -72,7 +68,7 @@ if($room){
 					data-variant="<?php echo $cart_item['data']->get_formatted_name(); ?>"
 					data-price="<?php echo $cart_item['data']->get_price(); ?>"
 					data-quantity="<?php echo $cart_item['quantity']; ?>"
-					class="cart-action-remove font-size-sm text-grey text-uppercase btn btn-mute btn-sm no-shadow" title="<?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?></button>
+					class="cart-action-remove font-size-sm text-grey btn btn-mute btn-sm no-shadow" title="<?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?></button>
 			</div>
 		</div>
 	</li>

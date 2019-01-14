@@ -35,39 +35,16 @@ if($seminar){
 	}else{
 		$remove						= '';
 	}?>
-	<li name="<?php echo $cart_item_key;?>" class="woocommerce-cart-item">
-		<div class="row grid-small d-flex align-items-center cart-item-name">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
-				<div class="bg-yellow padding-h-xs padding-v-xs font-weight-bold text-uppercase">
-					<?php echo $_product->get_title(); ?>
-				</div>
-			</div>
-			<?php
-			$images = $product->get_image_ids();
-			if(!empty($images)) {
-				?>
-				<div class="col-md-6 col-lg-7">
-					<div class="row m-0 d-none d-md-flex">
-						<?php
-						$x			= 0;
-						foreach($images as $image) {
-							if($x > 2) { break; }
-							$image_properties               = wp_get_attachment_image_src($image, array(100,100));
-                        ?>
-							<div class="col-4">
-								<img src="<?php echo $image_properties[0]; ?>" width="<?php echo $image_properties[1]; ?>" height="<?php echo $image_properties[2]; ?>" alt="Product image" class="modal-cart-image">
-							</div>
-                        <?php $x++; } ?>
-					</div>
-				</div>
-			<?php } ?>
+	<li name="<?php echo $cart_item_key;?>" class="woocommerce-cart-item m-0">
+		<div class="title bg-yellow font-weight-bold text-uppercase cart-item-name align-items-center d-flex p-4 mb-4">
+			<?php echo $_product->get_title(); ?>
 		</div>
 		<!-- slots ----------------------------------------------------- -->
-		<div class="row cart-quantity d-flex align-items-center">
-			<div class="col-xs-12 col-sm-6">
+		<div class="row d-flex align-items-center m-0 p-0 cart-quantity">
+			<div class="col-12 col-sm-6">
 				<?php _e('Seminarplätze','sv_bb_woo_cart_sidebar');?>
 			</div>
-			<div class="col-xs-12 col-sm-6 text-right cart-value">
+			<div class="col-12 col-sm-6 text-right cart-value">
 				<select
 						data-id="<?php echo $seminar->get_bb_meta('variation_id'); ?>"
 						data-title="<?php echo $seminar->get_title(); ?>"
@@ -90,37 +67,40 @@ if($seminar){
 					?>
 				</select>
 			</div>
+            <div class="col-12 text-grey font-size-sm pb-3">
+	            (Seminarteilnehmer können<br>Sie nach der Buchung zuweisen)
+            </div>
 		</div>
 		<!-- city ------------------------------------------------------ -->
-		<div class="row cart-city d-flex align-items-center">
-			<div class="col-xs-12 col-sm-6">
+		<div class="row d-flex align-items-center m-0 p-0 cart-city">
+			<div class="col-12 col-sm-6">
 				<?php _e('Stadt','sv_bb_woo_cart_sidebar');?>
 			</div>
-			<div class="col-xs-12 col-sm-6 text-right cart-value">
+			<div class="col-12 col-sm-6 text-right cart-value">
 				<?php echo $seminar->get_location()->get_bb_meta('city'); ?>
 			</div>
 		</div>
 		<!-- date ------------------------------------------------------ -->
-		<div class="row cart-date d-flex align-items-center">
-			<div class="col-xs-12 col-sm-6">
+		<div class="row d-flex align-items-center m-0 p-0 cart-date">
+			<div class="col-12 col-sm-6">
 				<?php _e('Datum','sv_bb_woo_cart_sidebar');?>
 			</div>
-			<div class="col-xs-12 col-sm-6 text-right cart-value">
+			<div class="col-12 col-sm-6 text-right cart-value">
 				<?php echo $seminar->get_date_condensed(); ?>
 			</div>
 		</div>
 		<!-- total ----------------------------------------------------- -->
-		<div class="row cart-total font-weight-bold d-flex align-items-center">
-			<div class="col-xs-12 col-sm-6">
+		<div class="row d-flex font-weight-bold align-items-center m-0 p-0 cart-total">
+			<div class="col-12 col-sm-6">
 				<?php _e('Summe','sv_bb_woo_cart_sidebar');?>
 			</div>
-			<div class="col-xs-12 col-sm-6 text-right cart-value">
+			<div class="col-12 col-sm-6 text-right cart-value">
 				<?php echo apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']),$cart_item, $cart_item_key); ?>
 			</div>
 		</div>
 		<!-- actions ----------------------------------------------------- -->
 		<div class="row cart-actions-sidebar">
-			<div class="col-xs-12 col-sm-12 text-right">
+			<div class="col-12 text-right">
 				<button
 						data-id="<?php echo $seminar->get_bb_meta('variation_id'); ?>"
 						data-title="<?php echo $seminar->get_title(); ?>"
@@ -128,7 +108,7 @@ if($seminar){
 						data-variant="<?php echo $location->get_bb_meta('city'); ?> - <?php echo $seminar->get_bb_meta('day_1'); ?>"
 						data-price="<?php echo $cart_item['data']->get_price(); ?>"
 						data-quantity="<?php echo $cart_item['quantity']; ?>"
-						class="cart-action-remove font-size-sm text-grey text-uppercase btn btn-mute btn-sm no-shadow" title="<?php _e('Entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Entfernen','sv_bb_woo_cart_sidebar');?></button>
+						class="cart-action-remove font-size-sm text-grey btn btn-mute btn-sm no-shadow" title="<?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?>"><?php _e('Produkt entfernen','sv_bb_woo_cart_sidebar');?></button>
 			</div>
 		</div>
 	</li>

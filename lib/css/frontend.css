@@ -133,3 +133,11 @@
 #gform_submit_button_1000 {
 	width: 100%;
 }
+.sv_checkout_coupon input#coupon_code_frontend {
+	min-height: 45px;
+}
+
+/* Custom Thank You Page */
+section.woocommerce-order-details div.order_total {
+	border-top: 1px solid #000;
+}

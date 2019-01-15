@@ -26,15 +26,20 @@ class sv_woocommerce extends init {
 		$this->set_section_type( 'settings' );
 		$this->get_root()->add_section( $this );
 
+		// Loads Styles
+		static::$scripts->create( $this )
+		                ->set_source( $this->get_file_url( 'lib/css/frontend.css' ), $this->get_file_path( 'lib/css/frontend.css' ) );
+
 		// Loads Settings
 		$this->load_settings();
 
 		// Action Hooks
 		add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
 		add_filter( 'woocommerce_email_headers', array( $this, 'woocommerce_completed_order_email_bcc_copy' ), 10, 2 );
+		add_filter( 'wc_get_template', array( $this, 'wc_get_template' ), 10, 5 );
 	}
 
-	public function load_settings(){
+	public function load_settings() {
 		$this->s['completed_order_email_bcc'] = static::$settings->create( $this )
 			->set_ID( 'completed_order_email_bcc' )
 			->set_title( __( 'Completed Order Email - Additional BCC Recipient', $this->get_module_name() ) )
@@ -52,6 +57,15 @@ class sv_woocommerce extends init {
 		}
 		// review implement notices here
 		return $headers;
+	}
+
+	public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
+		//var_dump($template_name);
+		if ( file_exists( $this->get_file_path( 'lib/tpl/' . $template_name ) ) ){
+			return $this->get_file_path( 'lib/tpl/' . $template_name );
+		} else {
+			return $located;
+		}
 	}
 
 	public function remove_woocommerce_styles_scripts() {

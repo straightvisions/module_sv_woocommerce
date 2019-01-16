@@ -34,6 +34,7 @@ class sv_woocommerce extends init {
 		$this->load_settings();
 
 		// Action Hooks
+		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
 		add_filter( 'woocommerce_email_headers', array( $this, 'woocommerce_completed_order_email_bcc_copy' ), 10, 2 );
 		add_filter( 'wc_get_template', array( $this, 'wc_get_template' ), 10, 5 );
@@ -45,6 +46,10 @@ class sv_woocommerce extends init {
 			->set_title( __( 'Completed Order Email - Additional BCC Recipient', $this->get_module_name() ) )
 			->set_description( __( 'Set an additional BCC Recipient for completed order email here', $this->get_module_name() ) )
 			->load_type( 'email' );
+	}
+
+	public function after_setup_theme() {
+		add_theme_support( 'woocommerce' );
 	}
 
 	// add bbc to emails
@@ -61,8 +66,8 @@ class sv_woocommerce extends init {
 
 	public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
 		//var_dump($template_name);
-		if ( file_exists( $this->get_file_path( 'lib/tpl/' . $template_name ) ) ){
-			return $this->get_file_path( 'lib/tpl/' . $template_name );
+		if ( file_exists( $this->get_file_path( 'lib/tpl/woocommerce/' . $template_name ) ) ){
+			return $this->get_file_path( 'lib/tpl/woocommerce/' . $template_name );
 		} else {
 			return $located;
 		}

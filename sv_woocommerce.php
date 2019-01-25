@@ -40,6 +40,18 @@
 				->set_title('Completed Order Email - Additional BCC Recipient')
 				->set_description(__('Set an additional BCC Recipient for completed order email here', $this->get_module_name()))
 				->load_type('email');
+
+			$this->s['checkout_info_title'] = static::$settings->create($this)
+			                                                   ->set_ID('checkout_info_title')
+			                                                   ->set_title('Title')
+			                                                   ->set_description(__('The title of the checkout info box.', $this->get_module_name()))
+			                                                   ->load_type('text');
+
+			$this->s['checkout_line_content'] = static::$settings->create($this)
+			                                                   ->set_ID('checkout_info_content')
+			                                                   ->set_title('Content')
+			                                                   ->set_description(__('This content will be shown in the checkout info box.', $this->get_module_name()))
+			                                                   ->load_type('textarea');
 		}
 		// add bbc to emails
 		public function woocommerce_completed_order_email_bcc_copy( $headers, $email_type ) {

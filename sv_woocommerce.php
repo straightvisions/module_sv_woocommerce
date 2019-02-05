@@ -34,12 +34,34 @@
 			$this->get_root()->add_section($this);
 			$this->load_settings();
 		}
-		public function load_settings(){
-			$this->s['completed_order_email_bcc'] = static::$settings->create($this)
-				->set_ID('completed_order_email_bcc')
-				->set_title('Completed Order Email - Additional BCC Recipient')
-				->set_description(__('Set an additional BCC Recipient for completed order email here', $this->get_module_name()))
-				->load_type('email');
+		public function load_settings() {
+			$this->s['completed_order_email_bcc'] = static::$settings->create( $this )
+			                                                         ->set_ID( 'completed_order_email_bcc' )
+			                                                         ->set_title( 'Completed Order Email - Additional BCC Recipient' )
+			                                                         ->set_description( __( 'Set an additional BCC Recipient for completed order email here', $this->get_module_name() ) )
+			                                                         ->load_type( 'email' );
+
+			$this->s['checkout_info_title'] =
+				static::$settings->create( $this )
+				                 ->set_ID( 'checkout_info_title' )
+				                 ->set_title( 'Checkout Info Title' )
+				                 ->set_description( __( 'The title of the checkout info box.', $this->get_module_name() ) )
+				                 ->load_type( 'text' );
+
+			// List Items
+			$this->s['chekout_info_list'] =
+				static::$settings->create( $this )
+				                 ->set_ID( 'chekout_info_list' )
+				                 ->set_title( __( 'Checkout Info List', $this->get_module_name() ) )
+				                 ->load_type( 'group' )
+				                 ->set_loop( - 1 );
+
+			$this->s['chekout_info_list']->run_type()
+			                             ->add_child( $this )
+			                             ->set_ID( 'list_item' )
+			                             ->set_title( __( 'List Item', $this->get_module_name() ) )
+			                             ->set_description( __( 'This list item will be shown in the checkout info box.', $this->get_module_name() ) )
+			                             ->load_type( 'text' );
 		}
 		// add bbc to emails
 		public function woocommerce_completed_order_email_bcc_copy( $headers, $email_type ) {

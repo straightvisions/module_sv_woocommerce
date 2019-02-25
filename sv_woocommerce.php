@@ -2,6 +2,7 @@
 namespace sv_100;
 
 /**
+ * @version         1.00
  * @author			straightvisions GmbH
  * @package			sv_100
  * @copyright		2017 straightvisions GmbH
@@ -42,10 +43,10 @@ class sv_woocommerce extends init {
 
 	public function load_settings() {
 		$this->s['completed_order_email_bcc'] = static::$settings->create( $this )
-			->set_ID( 'completed_order_email_bcc' )
-			->set_title( __( 'Completed Order Email - Additional BCC Recipient', $this->get_module_name() ) )
-			->set_description( __( 'Set an additional BCC Recipient for completed order email here', $this->get_module_name() ) )
-			->load_type( 'email' );
+		                                                         ->set_ID( 'completed_order_email_bcc' )
+		                                                         ->set_title( __( 'Completed Order Email - Additional BCC Recipient', $this->get_module_name() ) )
+		                                                         ->set_description( __( 'Set an additional BCC Recipient for completed order email here', $this->get_module_name() ) )
+		                                                         ->load_type( 'email' );
 	}
 
 	public function after_setup_theme() {
@@ -89,7 +90,7 @@ class sv_woocommerce extends init {
 		return '
 			<script type="text/javascript" id="' . $this->get_module_name() . '">
 				window.addEventListener( "load", function() { '.
-					preg_replace( '#<script(.*?)>(.*?)</script>#is', '$2', $js ) . '
+		       preg_replace( '#<script(.*?)>(.*?)</script>#is', '$2', $js ) . '
 				}, false );
 			</script>
 		';

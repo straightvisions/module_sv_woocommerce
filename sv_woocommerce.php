@@ -29,7 +29,7 @@ class sv_woocommerce extends init {
 
 		// Loads Styles
 		static::$scripts->create( $this )
-		                ->set_path( $this->get_file_path( 'lib/css/frontend.css' ) );
+		                ->set_path( $this->get_path( 'lib/css/frontend.css' ) );
 
 		// Loads Settings
 		$this->load_settings();
@@ -67,8 +67,8 @@ class sv_woocommerce extends init {
 
 	public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
 		//var_dump($template_name);
-		if ( file_exists( $this->get_file_path( 'lib/tpl/woocommerce/' . $template_name ) ) ){
-			return $this->get_file_path( 'lib/tpl/woocommerce/' . $template_name );
+		if ( file_exists( $this->get_path( 'lib/tpl/woocommerce/' . $template_name ) ) ){
+			return $this->get_path( 'lib/tpl/woocommerce/' . $template_name );
 		} else {
 			return $located;
 		}

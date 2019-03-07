@@ -29,7 +29,7 @@ class sv_woocommerce extends init {
 
 		// Loads Styles
 		static::$scripts->create( $this )
-		                ->set_path( $this->get_path( 'lib/css/frontend.css' ) );
+		                ->set_path( 'lib/css/frontend.css' );
 
 		// Loads Settings
 		$this->load_settings();

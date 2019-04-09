@@ -17,6 +17,9 @@ class sv_woocommerce extends init {
 	}
 
 	public function init() {
+		// Translates the module
+		load_theme_textdomain( $this->get_module_name(), $this->get_path( 'languages' ) );
+
 		// Module Info
 		$this->set_module_title( 'SV WooCommerce' );
 		$this->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', $this->get_module_name() ) );

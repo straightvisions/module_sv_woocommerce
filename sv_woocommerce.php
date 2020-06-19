@@ -15,8 +15,6 @@
 		public function init() {
 			$this->set_module_title( __( 'SV WooCommerce', 'sv100' ) )
 				->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', 'sv100' ) )
-				->load_modules()
-				->load_settings()
 				->set_section_title( __( 'WooCommerce', 'sv100' ) )
 				->set_section_desc( $this->get_module_desc() )
 				->set_section_type( 'settings' )
@@ -27,6 +25,11 @@
 			add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
 			add_filter( 'wc_get_template', array( $this, 'wc_get_template' ), 10, 5 );
+
+			add_action('wp', function(){
+				$this->get_module('sv_content')->get_script( 'content_common' )->set_is_enqueued();
+				$this->get_module('sv_content')->get_script( 'content_single' )->set_is_enqueued();
+			});
 		}
 		public function after_setup_theme() {
 			add_theme_support( 'woocommerce' );
@@ -43,9 +46,8 @@
 			wp_dequeue_script( 'wc-add-to-cart' );
 		}
 		public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
-			//var_dump($template_name);
-			if ( file_exists( $this->get_path( 'lib/tpl/woocommerce/' . $template_name ) ) ){
-				return $this->get_path( 'lib/tpl/woocommerce/' . $template_name );
+			if ( file_exists( $this->get_path( 'lib/frontend/tpl/' . $template_name ) ) ){
+				return $this->get_path( 'lib/frontend/tpl/' . $template_name );
 			} else {
 				return $located;
 			}

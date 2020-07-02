@@ -29,6 +29,7 @@
 			add_action('wp', function(){
 				$this->get_module('sv_content')->get_script( 'content_common' )->set_is_enqueued();
 				$this->get_module('sv_content')->get_script( 'content_single' )->set_is_enqueued();
+				$this->get_module('sv_content')->get_script( 'config' )->set_is_enqueued();
 			});
 		}
 		public function after_setup_theme() {

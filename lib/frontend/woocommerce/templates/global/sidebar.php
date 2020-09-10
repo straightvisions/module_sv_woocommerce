@@ -1,4 +1,7 @@
 <?php
+
+$module = $GLOBALS['sv100']->get_module('sv_woocommerce');
+
 /**
  * Sidebar
  *
@@ -19,6 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_sidebar( 'shop' );
-
+//get_sidebar( 'shop' );
+echo $module->get_module('sv_sidebar')->load(array('id' => $module->get_module_name().'_sidebar_top'));
+echo $module->get_module('sv_sidebar')->load(array('id' => $module->get_module_name().'_sidebar_right'));
+echo $module->get_module('sv_sidebar')->load(array('id' => $module->get_module_name().'_sidebar_bottom'));
+echo $module->get_module('sv_sidebar')->load(array('id' => $module->get_module_name().'_sidebar_left'));
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

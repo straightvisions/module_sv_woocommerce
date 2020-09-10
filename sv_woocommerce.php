@@ -117,25 +117,25 @@
 			if ( $this->get_module( 'sv_sidebar' ) ) {
 				$this->get_module( 'sv_sidebar' )
 					->create( $this )
-					->set_ID( 'sv_woocommerce_sidebar_top' )
+					->set_ID( 'sidebar_top' )
 					->set_title( __( 'WooCommerce Top', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar()
 
 					->create( $this )
-					->set_ID( 'sv_woocommerce_sidebar_bottom' )
+					->set_ID( 'sidebar_bottom' )
 					->set_title( __( 'WooCommerce Bottom', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar()
 
 					->create( $this )
-					->set_ID( 'sv_woocommerce_sidebar_left' )
+					->set_ID( 'sidebar_left' )
 					->set_title( __( 'WooCommerce Left', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar()
 
 					->create( $this )
-					->set_ID( 'sv_woocommerce_sidebar_right' )
+					->set_ID( 'sidebar_right' )
 					->set_title( __( 'WooCommerce Right', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar();

@@ -1,4 +1,7 @@
 <?php
+
+$module = $GLOBALS['sv100']->get_module('sv_woocommerce');
+
 /**
  * Content wrappers
  *

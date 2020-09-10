@@ -17,6 +17,7 @@
 			$this->set_module_title( __( 'SV WooCommerce', 'sv100' ) )
 				->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', 'sv100' ) )
 				->load_settings()
+				->register_sidebars()
 				->load_child_modules()
 				->set_section_title( __( 'WooCommerce', 'sv100' ) )
 				->set_section_desc( $this->get_module_desc() )
@@ -28,19 +29,32 @@
 			// Action Hooks
 			add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
 
+			//Redirect template @todo only redirect when module is activated
+
+
 			// opt-in
 			if( (bool) $this->get_setting('woocommerce_support')->get_data() === true ) {
 				add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
 				add_filter('wc_get_template', array($this, 'wc_get_template'), 10, 5);
+				add_filter( 'woocommerce_template_path', array($this, 'get_template_path'), 10, 5);
 
 				add_action('wp', function(){
 					$this->get_module('sv_content')->get_script( 'content_common' )->set_is_enqueued();
 					$this->get_module('sv_content')->get_script( 'content_single' )->set_is_enqueued();
 					$this->get_module('sv_content')->get_script( 'config' )->set_is_enqueued();
 				});
+
+
 			}
 
 
+		}
+
+		public function get_template_path($path){
+			//@todo test child theme overwrite
+			$template_path = $this->get_path('lib/frontend/woocommerce/');
+
+			return file_exists( $template_path ) ? $template_path : $path;
 		}
 
 		public function after_setup_theme() {
@@ -50,7 +64,7 @@
 		public function remove_woocommerce_styles_scripts() {
 			$woocommerce_support = $this->get_setting('woocommerce_support');
 
-			if( (bool)$woocommerce_support->get_data() === true ){
+			if( (bool)$woocommerce_support->get_data() === true && 1==2 ){
 				// Dequeue WooCommerce styles
 				wp_dequeue_style( 'woocommerce-layout' );
 				wp_dequeue_style( 'woocommerce-general' );
@@ -65,8 +79,8 @@
 		}
 
 		public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
-			if ( file_exists( $this->get_path( 'lib/frontend/tpl/' . $template_name ) ) ){
-				return $this->get_path( 'lib/frontend/tpl/' . $template_name );
+			if ( file_exists( $this->get_path( 'lib/frontend/woocommerce/templates/' . $template_name ) ) ){
+				return $this->get_path( 'lib/frontend/woocommerce/templates/' . $template_name );
 			} else {
 				return $located;
 			}
@@ -96,17 +110,36 @@
 				)
 				->load_type( 'margin' );
 
+			return $this;
+		}
 
-			// ### Widgets Settings ###
-			// Widgets Title
+		protected function register_sidebars(): sv_woocommerce {
+			if ( $this->get_module( 'sv_sidebar' ) ) {
+				$this->get_module( 'sv_sidebar' )
+					->create( $this )
+					->set_ID( 'sv_woocommerce_sidebar_top' )
+					->set_title( __( 'WooCommerce Top', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
 
-			// ### Sidebar Settings ###
-			// Post
-			/*$this->get_setting( 'show_sidebar_right_post' )
-				->set_title( __( 'Show right sidebar on posts', 'sv100' ) )
-				->set_default_value( 0 )
-				->load_type( 'checkbox' );*/
+					->create( $this )
+					->set_ID( 'sv_woocommerce_sidebar_bottom' )
+					->set_title( __( 'WooCommerce Bottom', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
 
+					->create( $this )
+					->set_ID( 'sv_woocommerce_sidebar_left' )
+					->set_title( __( 'WooCommerce Left', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
+
+					->create( $this )
+					->set_ID( 'sv_woocommerce_sidebar_right' )
+					->set_title( __( 'WooCommerce Right', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar();
+			}
 
 			return $this;
 		}

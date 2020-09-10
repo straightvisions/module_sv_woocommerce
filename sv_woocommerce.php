@@ -18,6 +18,7 @@
 				->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', 'sv100' ) )
 				->load_settings()
 				->register_sidebars()
+				->register_scripts()
 				->load_child_modules()
 				->set_section_title( __( 'WooCommerce', 'sv100' ) )
 				->set_section_desc( $this->get_module_desc() )
@@ -87,6 +88,8 @@
 		}
 
 		protected function load_settings(): sv_woocommerce{
+			$sv_content = $this->get_module('sv_content');
+
 			// prime
 			$this->get_setting('woocommerce_support')
 				->set_title(__('Activate ', 'sv100'))
@@ -101,19 +104,14 @@
 				->set_title( __( 'Padding', 'sv100' ) )
 				->set_is_responsive(true)
 				->set_default_value(
-					array( /* load defaults from sv_content */
-						'top'=>'40px',
-						'right'=>'20px',
-						'left'=>'20px',
-						'bottom'=>'40px'
-					)
+					$sv_content->get_setting('padding')->get_data()
 				)
 				->load_type( 'margin' );
 
 			return $this;
 		}
 
-		protected function register_sidebars(): sv_woocommerce {
+		protected function register_sidebars(): sv_woocommerce{
 			if ( $this->get_module( 'sv_sidebar' ) ) {
 				$this->get_module( 'sv_sidebar' )
 					->create( $this )
@@ -144,8 +142,24 @@
 			return $this;
 		}
 
+		private function register_scripts(): sv_woocommerce{
+			//@todo move set_is_enqueued to extra function with test for page type
+			$this->get_script( 'content_common' )
+				->set_path( 'lib/frontend/css/content/common.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'config' )
+				->set_path( 'lib/frontend/css/config.php' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			return $this;
+		}
+
 		// Loads required child modules
 		protected function load_child_modules(): sv_woocommerce {
+			// might be obsolete
 			$list = array(
 				'product',
 			// etc.

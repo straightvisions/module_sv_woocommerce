@@ -144,8 +144,23 @@
 
 		private function register_scripts(): sv_woocommerce{
 			//@todo move set_is_enqueued to extra function with test for page type
-			$this->get_script( 'content_common' )
-				->set_path( 'lib/frontend/css/content/common.css' )
+			$this->get_script( 'grid' )
+				->set_path( 'lib/frontend/css/grid.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'common' )
+				->set_path( 'lib/frontend/css/common.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'navigation_categories' )
+				->set_path( 'lib/frontend/css/navigation_categories.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'sidebars' )
+				->set_path( 'lib/frontend/css/sidebars.css' )
 				->set_inline( true )
 				->set_is_enqueued();
 

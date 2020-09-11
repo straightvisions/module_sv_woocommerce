@@ -30,10 +30,17 @@ switch ( $template ) {
 		break;
 }
 ?>
-<div>
-	<?php include('sidebar_top.php'); ?>
+<div class="<?php echo $module->get_prefix('sidebar_left_wrapper');?>">
+    <div class="<?php echo $module->get_prefix('sidebar_left_wrapper_inner'); ?>">
+		<?php include('sidebar_left.php'); ?>
+    </div>
 </div>
-<div>
-	<?php include('sidebar_left.php'); ?>
-</div>
-
+<div class="<?php echo $module->get_prefix('main_content_wrapper');?>">
+    <div class="<?php echo $module->get_prefix('main_content_wrapper_inner'); ?>">
+        <div class="<?php echo $module->get_prefix('sidebar_top_wrapper');?>">
+            <div class="<?php echo $module->get_prefix('sidebar_top_wrapper_inner'); ?>">
+                <?php include('sidebar_top.php'); ?>
+            </div>
+        </div>
+        <div class="<?php echo $module->get_prefix('content_wrapper');?>">
+            <div class="<?php echo $module->get_prefix('content_wrapper_inner');?>">

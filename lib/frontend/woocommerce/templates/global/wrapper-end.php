@@ -1,4 +1,7 @@
 <?php
+
+$module = $GLOBALS['sv100']->get_module('sv_woocommerce');
+
 /**
  * Content wrappers
  *
@@ -18,16 +21,25 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
-$template = wc_get_theme_slug_for_templates();
 ?>
-	<div>
-		<?php include('sidebar_right.php'); ?>
-	</div>
-	<div>
-		<?php include('sidebar_bottom.php'); ?>
-	</div>
-<?
+            </div>
+        </div>
+        <div class="<?php echo $module->get_prefix('sidebar_bottom_wrapper');?>">
+            <div class="<?php echo $module->get_prefix('sidebar_bottom_wrapper_inner'); ?>">
+                <?php include('sidebar_bottom.php'); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="<?php echo $module->get_prefix('sidebar_right_wrapper');?>">
+        <div class="<?php echo $module->get_prefix('sidebar_right_wrapper_inner'); ?>">
+			<?php include('sidebar_right.php'); ?>
+        </div>
+    </div>
+
+<?php
+$template = wc_get_theme_slug_for_templates();
 switch ( $template ) {
 	default:
 		echo '</main></div>';

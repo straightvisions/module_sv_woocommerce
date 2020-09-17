@@ -47,7 +47,7 @@
 			wp_dequeue_script( 'wc-add-to-cart' );
 		}
 		public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
-			if ( file_exists( $this->get_path( 'lib/frontend/tpl/' . $template_name ) ) ){
+			if ( is_file( $this->get_path( 'lib/frontend/tpl/' . $template_name ) ) ){
 				return $this->get_path( 'lib/frontend/tpl/' . $template_name );
 			} else {
 				return $located;

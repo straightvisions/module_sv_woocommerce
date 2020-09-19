@@ -1,21 +1,11 @@
 <?php
 	namespace sv100;
 
-	/**
-	 * @version         1.00
-	 * @author			straightvisions GmbH
-	 * @package			sv_100
-	 * @copyright		2017 straightvisions GmbH
-	 * @link			https://straightvisions.com
-	 * @since			1.0
-	 * @license			See license.txt or https://straightvisions.com
-	 */
-
 	class sv_woocommerce extends init {
 		public function init() {
 			$this->set_module_title( __( 'SV WooCommerce', 'sv100' ) )
 				->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', 'sv100' ) )
-				->set_section_title( __( 'WooCommerce', 'sv100' ) )
+				->set_section_title( $this->get_module_title() )
 				->set_section_desc( $this->get_module_desc() )
 				->set_section_type( 'settings' )
 				->get_root()

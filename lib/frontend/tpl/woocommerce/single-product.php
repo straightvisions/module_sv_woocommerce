@@ -53,7 +53,7 @@ get_header( 'shop' ); ?>
 		 *
 		 * @hooked woocommerce_get_sidebar - 10
 		 */
-		//do_action( 'woocommerce_sidebar' ); // we don't want woo sidebars
+		do_action( 'woocommerce_sidebar' ); // we don't want woo sidebars
 	?>
 
 <?php

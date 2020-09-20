@@ -31,7 +31,7 @@ class product extends sv_woocommerce {
 		return $this;
 	}
 
-	protected function register_scripts(): sv_woocommerce {
+	public function register_scripts(): sv_woocommerce {
 		// Styles - Archive
 		/*$this->get_script( 'archive_common' )
 			->set_path( 'lib/frontend/css/archive/common.css' )

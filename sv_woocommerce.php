@@ -37,7 +37,8 @@
 			if( (bool) $this->get_setting('woocommerce_support')->get_data() === true ) {
 				add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
 				add_filter('wc_get_template', array($this, 'wc_get_template'), 10, 5);
-				add_filter( 'woocommerce_template_path', array($this, 'get_template_path'), 10, 5);
+				add_filter( 'wc_get_template_part', array($this, 'wc_get_template_part'), 10, 3);
+
 
 				add_action('wp', function(){
 					$this->get_module('sv_content')->get_script( 'content_common' )->set_is_enqueued();
@@ -51,11 +52,11 @@
 
 		}
 
-		public function get_template_path($path){
+		public function wc_get_template_part($template, $slug, $name){
 			//@todo test child theme overwrite
-			$template_path = $this->get_path('lib/frontend/woocommerce/');
+			$template_path = $this->get_path('lib/frontend/tpl/woocommerce/'.$slug.'-'.$name.'.php');
 
-			return file_exists( $template_path ) ? $template_path : $path;
+			return file_exists( $template_path ) ? $template_path : $template;
 		}
 
 		public function after_setup_theme() {
@@ -65,7 +66,9 @@
 		public function remove_woocommerce_styles_scripts() {
 			$woocommerce_support = $this->get_setting('woocommerce_support');
 
-			if( (bool)$woocommerce_support->get_data() === true && 1==2 ){
+			if( (bool)$woocommerce_support->get_data() === true){
+				remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
+				/*
 				// Dequeue WooCommerce styles
 				wp_dequeue_style( 'woocommerce-layout' );
 				wp_dequeue_style( 'woocommerce-general' );
@@ -74,14 +77,14 @@
 				// Dequeue WooCommerce scripts
 				wp_dequeue_script( 'wc-cart-fragments' );
 				wp_dequeue_script( 'woocommerce' );
-				wp_dequeue_script( 'wc-add-to-cart' );
+				wp_dequeue_script( 'wc-add-to-cart' );*/
 			}
 
 		}
 
 		public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
-			if ( file_exists( $this->get_path( 'lib/frontend/woocommerce/templates/' . $template_name ) ) ){
-				return $this->get_path( 'lib/frontend/woocommerce/templates/' . $template_name );
+			if ( file_exists( $this->get_path( 'lib/frontend/tpl/woocommerce/' . $template_name ) ) ){
+				return $this->get_path( 'lib/frontend/tpl/woocommerce/' . $template_name );
 			} else {
 				return $located;
 			}
@@ -142,7 +145,7 @@
 			return $this;
 		}
 
-		private function register_scripts(): sv_woocommerce{
+		public function register_scripts(): sv_woocommerce{
 			//@todo move set_is_enqueued to extra function with test for page type
 			$this->get_script( 'grid' )
 				->set_path( 'lib/frontend/css/grid.css' )

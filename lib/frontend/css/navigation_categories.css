@@ -28,8 +28,9 @@
     font-weight:bold;
 }
 
-.widget.woocommerce.widget_product_categories .product-categories li.current-cat-parent{
-
+.widget.woocommerce.widget_product_categories .product-categories > li.current-cat.cat-parent > a{
+    background:rgba(173,33,37,1);
+    color:white;
 }
 
 .widget.woocommerce.widget_product_categories .product-categories li.current-cat-parent > a{

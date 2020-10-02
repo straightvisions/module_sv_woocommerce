@@ -7,9 +7,7 @@
 				->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', 'sv100' ) )
 				->set_section_title( $this->get_module_title() )
 				->set_section_desc( $this->get_module_desc() )
-				->set_section_type( 'settings' )
-				->get_root()
-				->add_section( $this );
+				->set_section_type( 'settings' );
 
 			// Action Hooks
 			add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );

@@ -124,6 +124,12 @@
 					->load_sidebar()
 
 					->create( $this )
+					->set_ID( 'sidebar_top_2' )
+					->set_title( __( 'WooCommerce Top 2', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
+
+					->create( $this )
 					->set_ID( 'sidebar_bottom' )
 					->set_title( __( 'WooCommerce Bottom', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )

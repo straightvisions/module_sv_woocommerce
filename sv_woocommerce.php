@@ -11,7 +11,7 @@
 
 			// Action Hooks
 			add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
+			//add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
 			add_filter( 'wc_get_template', array( $this, 'wc_get_template' ), 10, 5 );
 
 			add_action('wp', function(){
@@ -21,7 +21,7 @@
 			});
 		}
 		public function after_setup_theme() {
-			add_theme_support( 'woocommerce' );
+			//add_theme_support( 'woocommerce' );
 		}
 		public function remove_woocommerce_styles_scripts() {
 			// Dequeue WooCommerce styles

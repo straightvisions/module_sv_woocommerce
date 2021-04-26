@@ -20,6 +20,12 @@
 				$this->get_module('sv_content')->get_script( 'content_single' )->set_is_enqueued();
 				$this->get_module('sv_content')->get_script( 'config' )->set_is_enqueued();
 			});
+
+			/*add_action( 'after_setup_theme', function(){
+				add_theme_support( 'woocommerce' );
+			} );*/
+
+			add_filter( 'comments_template', array( '\WC_Template_Loader', 'comments_template_loader' ) );
 		}
 		public function after_setup_theme() {
 			//add_theme_support( 'woocommerce' );

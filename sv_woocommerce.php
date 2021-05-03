@@ -10,6 +10,8 @@
 				->set_section_desc( $this->get_module_desc() )
 				->set_section_type( 'settings' );
 
+			$this->register_scripts();
+
 			// Action Hooks
 			add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
 			//add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
@@ -25,7 +27,9 @@
 				add_theme_support( 'woocommerce' );
 			} );*/
 
-			add_filter( 'comments_template', array( '\WC_Template_Loader', 'comments_template_loader' ) );
+			if(function_exists('is_product') && is_product()){
+				add_filter( 'comments_template', array( '\WC_Template_Loader', 'comments_template_loader' ) );
+			}
 		}
 		public function after_setup_theme() {
 			//add_theme_support( 'woocommerce' );
@@ -42,8 +46,6 @@
 			wp_dequeue_script( 'wc-add-to-cart' );
 		}
 		public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
-			$this->register_scripts();
-
 			if ( is_file( $this->get_path( 'lib/frontend/tpl/' . $template_name ) ) ){
 				return $this->get_path( 'lib/frontend/tpl/' . $template_name );
 			} else {

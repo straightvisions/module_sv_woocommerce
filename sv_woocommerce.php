@@ -27,9 +27,11 @@
 				add_theme_support( 'woocommerce' );
 			} );*/
 
-			if(function_exists('is_product') && is_product()){
-				add_filter( 'comments_template', array( '\WC_Template_Loader', 'comments_template_loader' ) );
-			}
+			add_action('wp', function(){
+				if(function_exists('is_product') && is_product()){
+					add_filter( 'comments_template', array( '\WC_Template_Loader', 'comments_template_loader' ) );
+				}
+			});
 		}
 		public function after_setup_theme() {
 			//add_theme_support( 'woocommerce' );

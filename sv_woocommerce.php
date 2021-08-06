@@ -117,32 +117,27 @@
 		protected function register_sidebars(): sv_woocommerce{
 			if ( $this->get_module( 'sv_sidebar' ) ) {
 				$this->get_module( 'sv_sidebar' )
-					->create( $this )
-					->set_ID( 'sidebar_top' )
+					->create( $this, 'sidebar_top' )
 					->set_title( __( 'WooCommerce Top', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar()
 
-					->create( $this )
-					->set_ID( 'sidebar_top_2' )
+					->create( $this, 'sidebar_top_2' )
 					->set_title( __( 'WooCommerce Top 2', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar()
 
-					->create( $this )
-					->set_ID( 'sidebar_bottom' )
+					->create( $this, 'sidebar_bottom' )
 					->set_title( __( 'WooCommerce Bottom', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar()
 
-					->create( $this )
-					->set_ID( 'sidebar_left' )
+					->create( $this, 'sidebar_left' )
 					->set_title( __( 'WooCommerce Left', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar()
 
-					->create( $this )
-					->set_ID( 'sidebar_right' )
+					->create( $this, 'sidebar_right' )
 					->set_title( __( 'WooCommerce Right', 'sv100' ) )
 					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
 					->load_sidebar();

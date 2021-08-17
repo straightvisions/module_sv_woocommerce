@@ -13,12 +13,13 @@
 
 }
 
-.widget.woocommerce.widget_product_categories .product-categories li{
-
+.widget.woocommerce.widget_product_categories .product-categories li {
+    margin: 0;
 }
 
 .widget.woocommerce.widget_product_categories .product-categories li a{
     display:block;
+    width:100%;
     padding: 15px 20px;
     border-top:1px solid rgba(245,245,245,1);
 }

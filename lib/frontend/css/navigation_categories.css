@@ -1,0 +1,55 @@
+/*
+@todo all to settings
+ */
+.widget.woocommerce.widget_product_categories {
+    background:white;
+}
+
+.widget.woocommerce.widget_product_categories .widget-title{
+    padding:20px;
+}
+
+.widget.woocommerce.widget_product_categories .product-categories{
+
+}
+
+.widget.woocommerce.widget_product_categories .product-categories li {
+    margin: 0;
+}
+
+.widget.woocommerce.widget_product_categories .product-categories li a{
+    display:block;
+    width:100%;
+    padding: 15px 20px;
+    border-top:1px solid rgba(245,245,245,1);
+}
+
+.widget.woocommerce.widget_product_categories .product-categories li.current-cat > a{
+    color:rgba(173,33,37,1);
+    font-weight:bold;
+}
+
+.widget.woocommerce.widget_product_categories .product-categories > li.current-cat.cat-parent > a{
+    background:rgba(173,33,37,1);
+    color:white;
+}
+
+.widget.woocommerce.widget_product_categories .product-categories li.current-cat-parent > a{
+    background:rgba(173,33,37,1);
+    color:white;
+}
+
+/* needs to be after current-cat to assure color white on hover */
+.widget.woocommerce.widget_product_categories .product-categories li a:hover{
+    background:rgba(173,33,37,1);
+    color:white;
+}
+
+
+
+
+
+
+.widget.woocommerce.widget_product_categories .product-categories .children{
+    border-left:20px solid rgba(245,245,245,1);
+}

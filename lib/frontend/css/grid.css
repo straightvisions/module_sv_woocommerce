@@ -1,0 +1,40 @@
+/* SHOP GRID */
+.sv100_sv_woocommerce_wrapper{
+    display:flex;
+    padding-top:64px; /* settings */
+    padding-bottom:64px; /* settings */
+}
+
+.sv100_sv_woocommerce_wrapper_inner{
+    display:flex;
+    flex: 1 1 auto;
+}
+
+.sv100_sv_woocommerce_main_content_wrapper{
+    width:100%;
+    flex-grow:1;
+}
+
+.sv100_sv_woocommerce_main_content_wrapper_inner{
+    display:flex;
+    flex-direction:column;
+    padding:0 32px;
+}
+
+.sv100_sv_woocommerce_content_wrapper{
+
+}
+
+.sv100_sv_woocommerce_content_wrapper_inner{
+    padding:20px 0;
+}
+
+.sv100_sv_woocommerce_sidebar_top_wrapper{
+    display:flex;
+    width:100%;
+}
+
+.sv100_sv_woocommerce_sidebar_top_wrapper_inner{
+    width:100%;
+}
+

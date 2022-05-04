@@ -1,102 +1,203 @@
 <?php
-namespace sv_100;
+	namespace sv100;
 
-/**
- * @version         1.00
- * @author			straightvisions GmbH
- * @package			sv_100
- * @copyright		2017 straightvisions GmbH
- * @link			https://straightvisions.com
- * @since			1.0
- * @license			See license.txt or https://straightvisions.com
- */
+	/**
+	 * @version         4.001
+	 * @author			straightvisions GmbH
+	 * @package			sv_100
+	 * @copyright		2020 straightvisions GmbH
+	 * @link			https://straightvisions.com
+	 * @since			1.0
+	 * @license			See license.txt or https://straightvisions.com
+	 */
 
-class sv_woocommerce extends init {
-	public function __construct() {
+	class sv_woocommerce extends init {
 
-	}
+		public function init() {
+			$this->set_module_title( __( 'SV WooCommerce', 'sv100' ) )
+				->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', 'sv100' ) )
+				->load_settings()
+				->register_sidebars()
+				->register_scripts()
+				->load_child_modules()
+				->set_section_title( __( 'WooCommerce', 'sv100' ) )
+				->set_section_desc( $this->get_module_desc() )
+				->set_section_type( 'settings' )
+				->set_section_template_path( $this->get_path( 'lib/backend/tpl/settings.php' ) )
+				->get_root()
+				->add_section( $this );
 
-	public function init() {
-		// Translates the module
-		load_theme_textdomain( $this->get_module_name(), $this->get_path( 'languages' ) );
+			// Action Hooks
+			add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
 
-		// Module Info
-		$this->set_module_title( 'SV WooCommerce' );
-		$this->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', $this->get_module_name() ) );
+			//Redirect template @todo only redirect when module is activated
 
-		// Section Info
-		$this->set_section_title( 'WooCommerce' );
-		$this->set_section_desc( 'WooCommerce Settings' );
-		$this->set_section_type( 'settings' );
-		$this->get_root()->add_section( $this );
 
-		// Loads Styles
-		static::$scripts->create( $this )
-		                ->set_path( 'lib/css/frontend.css' );
+			// opt-in
+			if( (bool) $this->get_setting('woocommerce_support')->get_data() === true ) {
+				add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
+				add_filter('wc_get_template', array($this, 'wc_get_template'), 10, 5);
+				add_filter( 'wc_get_template_part', array($this, 'wc_get_template_part'), 10, 3);
 
-		// Loads Settings
-		$this->load_settings();
 
-		// Action Hooks
-		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'remove_woocommerce_styles_scripts' ), 99 );
-		add_filter( 'woocommerce_email_headers', array( $this, 'woocommerce_completed_order_email_bcc_copy' ), 10, 2 );
-		add_filter( 'wc_get_template', array( $this, 'wc_get_template' ), 10, 5 );
-	}
+				add_action('wp', function(){
+					$this->get_module('sv_content')->get_script( 'content_common' )->set_is_enqueued();
+					$this->get_module('sv_content')->get_script( 'content_single' )->set_is_enqueued();
+					$this->get_module('sv_content')->get_script( 'config' )->set_is_enqueued();
+				});
 
-	public function load_settings() {
-		$this->s['completed_order_email_bcc'] = static::$settings->create( $this )
-		                                                         ->set_ID( 'completed_order_email_bcc' )
-		                                                         ->set_title( __( 'Completed Order Email - Additional BCC Recipient', $this->get_module_name() ) )
-		                                                         ->set_description( __( 'Set an additional BCC Recipient for completed order email here', $this->get_module_name() ) )
-		                                                         ->load_type( 'email' );
-	}
 
-	public function after_setup_theme() {
-		add_theme_support( 'woocommerce' );
-	}
+			}
 
-	// add bbc to emails
-	public function woocommerce_completed_order_email_bcc_copy( $headers, $email_type ) {
-		if ( $email_type == 'customer_completed_order' ) {
-			if ( $this->s['completed_order_email_bcc']->run_type()->get_data() ) {
-				$emails = str_replace( ' ', '', $this->s['completed_order_email_bcc']->run_type()->get_data() );
-				$headers .= 'BCC: ' . $emails . "\r\n";
+
+		}
+
+		public function wc_get_template_part($template, $slug, $name){
+			//@todo test child theme overwrite
+			$template_path = $this->get_path('lib/frontend/tpl/woocommerce/'.$slug.'-'.$name.'.php');
+
+			return file_exists( $template_path ) ? $template_path : $template;
+		}
+
+		public function after_setup_theme() {
+			add_theme_support( 'woocommerce' );
+		}
+
+		public function remove_woocommerce_styles_scripts() {
+			$woocommerce_support = $this->get_setting('woocommerce_support');
+
+			if( (bool)$woocommerce_support->get_data() === true){
+				remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
+				/*
+				// Dequeue WooCommerce styles
+				wp_dequeue_style( 'woocommerce-layout' );
+				wp_dequeue_style( 'woocommerce-general' );
+				wp_dequeue_style( 'woocommerce-smallscreen' );
+
+				// Dequeue WooCommerce scripts
+				wp_dequeue_script( 'wc-cart-fragments' );
+				wp_dequeue_script( 'woocommerce' );
+				wp_dequeue_script( 'wc-add-to-cart' );*/
+			}
+
+		}
+
+		public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
+			if ( file_exists( $this->get_path( 'lib/frontend/tpl/woocommerce/' . $template_name ) ) ){
+				return $this->get_path( 'lib/frontend/tpl/woocommerce/' . $template_name );
+			} else {
+				return $located;
 			}
 		}
-		// review implement notices here
-		return $headers;
-	}
 
-	public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
-		//var_dump($template_name);
-		if ( file_exists( $this->get_path( 'lib/tpl/woocommerce/' . $template_name ) ) ){
-			return $this->get_path( 'lib/tpl/woocommerce/' . $template_name );
-		} else {
-			return $located;
+		protected function load_settings(): sv_woocommerce{
+			$sv_content = $this->get_module('sv_content');
+
+			// prime
+			$this->get_setting('woocommerce_support')
+				->set_title(__('Activate ', 'sv100'))
+				->load_type('checkbox');
+
+			$this->get_setting( 'margin' )
+				->set_title( __( 'Margin', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'margin' );
+
+			$this->get_setting( 'padding' )
+				->set_title( __( 'Padding', 'sv100' ) )
+				->set_is_responsive(true)
+				->set_default_value(
+					$sv_content->get_setting('padding')->get_data()
+				)
+				->load_type( 'margin' );
+
+			return $this;
 		}
+
+		protected function register_sidebars(): sv_woocommerce{
+			
+			if ( $this->get_module( 'sv_sidebar' ) ) {
+				$this->get_module( 'sv_sidebar')
+					->create( $this, $this->get_prefix('sidebar_top') )
+					->set_title( __( 'WooCommerce Top', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
+
+					->create( $this, $this->get_prefix('sidebar_top_2') )
+					->set_title( __( 'WooCommerce Top 2', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
+
+					->create( $this, $this->get_prefix('sidebar_bottom') )
+					->set_title( __( 'WooCommerce Bottom', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
+
+					->create( $this, $this->get_prefix('sidebar_left') )
+					->set_title( __( 'WooCommerce Left', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar()
+
+					->create( $this, $this->get_prefix('sidebar_right') )
+					->set_title( __( 'WooCommerce Right', 'sv100' ) )
+					->set_desc( __( 'Widgets in this sidebar will be shown.', 'sv100' ) )
+					->load_sidebar();
+			}
+
+			return $this;
+		}
+
+		public function register_scripts(): sv_woocommerce{
+			//@todo move set_is_enqueued to extra function with test for page type
+			$this->get_script( 'grid' )
+				->set_path( 'lib/frontend/css/grid.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'common' )
+				->set_path( 'lib/frontend/css/common.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'navigation_categories' )
+				->set_path( 'lib/frontend/css/navigation_categories.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'sidebars' )
+				->set_path( 'lib/frontend/css/sidebars.css' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			$this->get_script( 'config' )
+				->set_path( 'lib/frontend/css/config.php' )
+				->set_inline( true )
+				->set_is_enqueued();
+
+			return $this;
+		}
+
+		// Loads required child modules
+		protected function load_child_modules(): sv_woocommerce {
+			// might be obsolete
+			$list = array(
+				'product',
+			// etc.
+			);
+
+			foreach($list as $name){
+				require_once( $this->get_path('lib/modules/'.$name.'.php') );
+				$class = 'sv100\\'.$name;
+				$module = new $class();
+				$module
+					->set_root( $this->get_root() )
+					->set_parent( $this )
+					->init();
+
+				$this->{'woocommerce_'.$name} = $module;
+			}
+
+			return $this;
+		}
+
 	}
-
-	public function remove_woocommerce_styles_scripts() {
-		// Dequeue WooCommerce styles
-		wp_dequeue_style( 'woocommerce-layout' );
-		wp_dequeue_style( 'woocommerce-general' );
-		wp_dequeue_style( 'woocommerce-smallscreen' );
-
-		// Dequeue WooCommerce scripts
-		wp_dequeue_script( 'wc-cart-fragments' );
-		wp_dequeue_script( 'woocommerce' );
-		wp_dequeue_script( 'wc-add-to-cart' );
-	}
-
-	public function woocommerce_queued_js( $js ) {
-		return '
-			<script type="text/javascript" id="' . $this->get_module_name() . '">
-				window.addEventListener( "load", function() { '.
-		       preg_replace( '#<script(.*?)>(.*?)</script>#is', '$2', $js ) . '
-				}, false );
-			</script>
-		';
-	}
-
-}

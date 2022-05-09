@@ -1,0 +1,3 @@
+.woocommerce .products ul, .woocommerce ul.products{
+	flex-wrap:wrap;
+}

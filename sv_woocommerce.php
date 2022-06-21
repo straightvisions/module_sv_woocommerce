@@ -5,7 +5,6 @@
 		public function init() {
 			$this->set_module_title( __( 'SV WooCommerce', 'sv100' ) )
 				->set_module_desc( __( 'This module gives the ability to manage WooCommerce templates.', 'sv100' ) )
-				->set_css_cache_active()
 				->set_section_title( $this->get_module_title() )
 				->set_section_desc( $this->get_module_desc() )
 				->set_section_type( 'settings' );
